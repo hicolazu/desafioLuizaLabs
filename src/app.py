@@ -24,7 +24,11 @@ def create_app():
     def get_friends_of_person() -> Response:
         query_parameters = request.args
         name = query_parameters.get('name')
-        friend_list = service.get_friend_list(name)
+
+        try:
+            friend_list = service.get_friend_list(name)
+        except Exception as e:
+            return Response(response=json.dumps({'erro': str(e)}), status=400, mimetype='application/json')
 
         friend_list_dict = list(map(lambda x: map_person_to_dict(x), friend_list))
 
@@ -34,7 +38,11 @@ def create_app():
     def get_non_friend_list() -> Response:
         query_parameters = request.args
         name = query_parameters.get('name')
-        non_friend_list = service.get_non_friend_list(name)
+
+        try:
+            non_friend_list = service.get_non_friend_list(name)
+        except Exception as e:
+            return Response(response=json.dumps({'erro': str(e)}), status=400, mimetype='application/json')
 
         non_friend_list_dict = list(map(lambda x: map_person_to_dict(x), non_friend_list))
 

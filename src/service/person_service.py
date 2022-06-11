@@ -16,6 +16,10 @@ def get_all_person() -> [Person]:
 
 def get_friend_list(name: str) -> [Person]:
     person = person_repository.find_by_name(name)
+
+    if person is None:
+        raise Exception('Person not found!')
+
     graph = build_graph()
 
     if person is not None:
@@ -29,6 +33,9 @@ def get_friend_list(name: str) -> [Person]:
 def get_non_friend_list(name: str) -> [Person]:
     non_friend_id_list = []
     person = person_repository.find_by_name(name)
+
+    if person is None:
+        raise Exception('Person not found!')
 
     friend_list = get_friend_list(person.name)
     friend_id_list = list(map(lambda x: x.id, friend_list))
