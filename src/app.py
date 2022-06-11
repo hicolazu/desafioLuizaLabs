@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.INFO, force=True)
 def create_app():
     app = Flask(__name__)
 
-    @app.route('/people', methods=['GET'])
+    @app.route('/person/all', methods=['GET'])
     def get_all_people() -> Response:
         people = service.get_all_person()
 
@@ -20,7 +20,7 @@ def create_app():
 
         return Response(response=json.dumps(people_dict), status=200, mimetype='application/json')
 
-    @app.route('/friend_list', methods=['GET'])
+    @app.route('/person/friend_list', methods=['GET'])
     def get_friends_of_person() -> Response:
         query_parameters = request.args
         name = query_parameters.get('name')
@@ -30,7 +30,7 @@ def create_app():
 
         return Response(response=json.dumps(friend_list_dict), status=200, mimetype='application/json')
 
-    @app.route('/non_friend_list', methods=['GET'])
+    @app.route('/person/non_friend_list', methods=['GET'])
     def get_non_friend_list() -> Response:
         query_parameters = request.args
         name = query_parameters.get('name')
@@ -40,5 +40,15 @@ def create_app():
 
         return Response(response=json.dumps(non_friend_list_dict), status=200, mimetype='application/json')
 
+    @app.route('/person/save', methods=['POST'])
+    def save() -> Response:
+        body = request.json
+
+        try:
+            id = service.save(body['name'], body['friend_list'])
+        except Exception as e:
+            return Response(response=json.dumps({'erro': str(e)}), status=400, mimetype='application/json')
+
+        return Response(response=json.dumps({'id': id}), status=200, mimetype='application/json')
 
     return app

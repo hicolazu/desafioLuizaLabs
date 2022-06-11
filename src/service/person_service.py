@@ -43,3 +43,7 @@ def get_non_friend_list(name: str) -> [Person]:
     non_friend_list = person_repository.find_by_ids(non_friend_id_list)
 
     return non_friend_list
+
+
+def save(name: str, friends_name_list: [str]) -> int:
+    return person_repository.save(name, friends_name_list)
