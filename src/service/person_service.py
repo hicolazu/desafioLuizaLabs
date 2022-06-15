@@ -1,9 +1,8 @@
 import logging
 
-from src.model.person import Person
-from src.repository import person_repository
-from src.builder.graph_builder import build_graph
-from src.mapper.person_mapper import map_person_to_dict
+from model.person import Person
+from repository import person_repository
+from builder.graph_builder import build_graph
 
 logging.basicConfig(level=logging.INFO, force=True)
 

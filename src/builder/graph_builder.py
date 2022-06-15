@@ -1,5 +1,5 @@
-from src.model.graph import Graph
-from src.repository import person_repository
+from model.graph import Graph
+from repository import person_repository
 
 
 def build_graph() -> Graph:

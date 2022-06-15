@@ -1,4 +1,4 @@
-from src.model.person import Person
+from model.person import Person
 
 
 def find_all() -> [Person]:

@@ -1,4 +1,4 @@
-from src.model.person import Person
+from model.person import Person
 
 
 def map_person_to_dict(person: Person) -> dict:

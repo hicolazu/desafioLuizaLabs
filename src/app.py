@@ -1,10 +1,10 @@
 import logging
 import json
+
 import service.person_service as service
 
 from flask import Flask, Response, request
-
-from src.mapper.person_mapper import map_person_to_dict
+from mapper.person_mapper import map_person_to_dict
 
 logging.basicConfig(level=logging.INFO, force=True)
 
