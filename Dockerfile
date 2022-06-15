@@ -12,4 +12,4 @@ COPY ./src /app
 
 EXPOSE 8080
 
-ENTRYPOINT exec python run.py
+ENTRYPOINT exec python3 run.py

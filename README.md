@@ -21,5 +21,10 @@ docker build -t friends .
 
 Para rodar a aplicação, basta executar o seguinte comando:
 ```
-docker run -d -p 8080:8080 friends
+docker run -d -p 8080:8080 -e PROFILE=Production friends
+```
+
+Para rodar os testes, basta executar o comando abaixo:
+```
+python3 -m unittest src.test.${arquivo_de_teste}
 ```

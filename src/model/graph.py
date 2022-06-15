@@ -1,6 +1,7 @@
 from model.person import Person
 
 
+# Implementation of Undirected Graph
 class Graph:
     def __init__(self):
         self.nodes = []

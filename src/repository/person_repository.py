@@ -1,10 +1,14 @@
 from model.person import Person
+from configuration import get_property
+
+__people_filename = get_property('people.file.path')
+__friends_filename = get_property('friends.file.path')
 
 
 def find_all() -> [Person]:
     people = []
 
-    with open("people.txt", "r") as file:
+    with open(__people_filename, "r") as file:
         for line in file.readlines():
             line = line.split()
             if len(line) > 1:
@@ -15,7 +19,7 @@ def find_all() -> [Person]:
 
 
 def find_by_name(name: str) -> Person:
-    with open("people.txt", "r") as file:
+    with open(__people_filename, "r") as file:
         for line in file.readlines():
             line = line.split()
             if len(line) > 1:
@@ -28,7 +32,7 @@ def find_by_name(name: str) -> Person:
 def find_by_ids(ids: [int]) -> [Person]:
     people = []
 
-    with open("people.txt", "r") as file:
+    with open(__people_filename, "r") as file:
         for line in file.readlines():
             line = line.split()
             if len(line) > 1:
@@ -42,7 +46,7 @@ def find_by_ids(ids: [int]) -> [Person]:
 def find_by_names(names: [str]) -> [Person]:
     people = []
 
-    with open("people.txt", "r") as file:
+    with open(__people_filename, "r") as file:
         for line in file.readlines():
             line = line.split()
             if len(line) > 1:
@@ -56,7 +60,7 @@ def find_by_names(names: [str]) -> [Person]:
 def get_last_id() -> int:
     last_id = 0
 
-    with open("people.txt", "r") as file:
+    with open(__people_filename, "r") as file:
         for line in file.readlines():
             line = line.split()
             if len(line) > 1:
@@ -75,10 +79,10 @@ def save(name: str, friends_name_list: [str]) -> int:
     if len(friend_list) != len(friends_name_list):
         raise Exception('One or more friends not found!')
 
-    with open("people.txt", "a") as file:
+    with open(__people_filename, "a") as file:
         file.write(str(new_person.id) + ' ' + new_person.name + '\n')
 
-    with open("friends.pajek", "a") as file:
+    with open(__friends_filename, "a") as file:
         for friend in friend_list:
             file.write(str(new_person.id) + ' ' + str(friend.id) + '\n')
 
